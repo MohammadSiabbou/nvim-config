@@ -41,7 +41,10 @@ M.capabilities.textDocument.completion.completionItem = {
   },
 }
 
-require("lspconfig").lua_ls.setup {
+
+
+local lspconfig = require("lspconfig");
+lspconfig.lua_ls.setup {
   on_attach = M.on_attach,
   capabilities = M.capabilities,
 
@@ -64,4 +67,33 @@ require("lspconfig").lua_ls.setup {
   },
 }
 
+lspconfig.phpactor.setup({
+  on_attach = M.on_attach,
+  capabilities = M.capabilities,
+  filetypes = {"php"},
+  init_options = {
+      ["language_server_phpstan.enabled"] = false,
+      ["language_server_psalm.enabled"] = false,
+      ["language_server_php_cs_fixer.enabled"] = true,
+  }
+})
+
+lspconfig.volar.setup({
+  on_attach = M.on_attach,
+  capabilities = M.capabilities
+})
+
+lspconfig.html.setup({
+  on_attach = M.on_attach,
+  capabilities = M.capabilities,
+})
+
+
+lspconfig.tsserver.setup({
+  on_attach = M.on_attach,
+  capabilities = M.capabilities,
+})
+
+
 return M
+
